@@ -3,6 +3,12 @@ class Bookmark < Site
 
   before_validation :set_site
 
+  def self.search(query)
+    return self.all unless query
+
+    where("url ILIKE ? or url_short ILIKE ? or title ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%")
+  end
+
   protected
 
     def set_site

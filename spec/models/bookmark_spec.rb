@@ -44,4 +44,20 @@ RSpec.describe Bookmark, type: :model do
       end
     end
   end
+
+  describe ".search" do
+    let(:bookmark) { create(:bookmark) }
+
+    it "finds by title" do
+      expect(Bookmark.search("site")).to include(bookmark)
+    end
+
+    it "finds by url" do
+      expect(Bookmark.search("mysite")).to include(bookmark)
+    end
+
+    it "finds by url_short" do
+      expect(Bookmark.search("my.co")).to include(bookmark)
+    end
+  end
 end
