@@ -60,4 +60,45 @@ RSpec.describe Bookmark, type: :model do
       expect(Bookmark.search("my.co")).to include(bookmark)
     end
   end
+
+  describe "#tags=" do
+    let(:bookmark) { build(:bookmark) }
+
+    it "creates and sets tags separated by commas" do
+      bookmark.tags = "tag1, tag 2,tag 3"
+
+      expect(bookmark.tags.size).to eq(3)
+    end
+
+    it "saves generated tags" do
+      bookmark.tags = "tag1, tag 2,tag 3"
+
+      expect { bookmark.save }.to change { Tag.count }.by(3)
+    end
+
+    it "does not create existing tags" do
+      Tag.create(name: "tag1")
+      bookmark.tags = "tag1, tag 2,tag 3"
+
+      expect { bookmark.save }.to change { Tag.count }.by(2)
+    end
+
+    it "removes previously set tags" do
+      tag = Tag.create(name: "tag1")
+      bookmark.tags = "tag1"
+
+      expect(bookmark.tags).to include(tag)
+
+      bookmark.tags = "tag 2,tag 3"
+
+      expect(bookmark.tags).not_to include(tag)
+    end
+
+    it "only create unique tags" do
+      bookmark.tags = "tag1, tag1, tag1"
+
+      expect { bookmark.save }.to change { Tag.count }.by(1).and change { Tagging.count }.by(1)
+    end
+  end
+
 end

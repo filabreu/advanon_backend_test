@@ -21,6 +21,7 @@
           <th>URL</th>
           <th>Shortified URL</th>
           <th>Site</th>
+          <th>Tags</th>
           <th colspan="2"></th>
         </tr>
       </thead>
@@ -32,6 +33,7 @@
             <td><%= link_to bookmark.url %></td>
             <td><%= link_to bookmark.url_short %></td>
             <td><%= link_to bookmark.site.url %></td>
+            <td><%= bookmark_tags(bookmark) %></td>
             <td>
               <%= link_to edit_bookmark_path(bookmark), class: "btn btn-sm btn-success" do %>
                 <i class="glyphicon glyphicon-pencil"></i>
