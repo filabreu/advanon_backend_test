@@ -1,0 +1,40 @@
+<h3 class="page-header">Bookmarks</h3>
+
+<p>
+  <%= link_to 'New Bookmark', new_bookmark_path, class: "btn btn-primary" %>
+</p>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>URL</th>
+          <th>Shortified URL</th>
+          <th>Site</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @bookmarks.each do |bookmark| %>
+          <tr>
+            <td><%= bookmark.title %></td>
+            <td><%= link_to bookmark.url %></td>
+            <td><%= link_to bookmark.url_short %></td>
+            <td><%= link_to bookmark.site.url %></td>
+            <td>
+              <%= link_to edit_bookmark_path(bookmark), class: "btn btn-sm btn-success" do %>
+                <i class="glyphicon glyphicon-pencil"></i>
+              <% end %>
+              <%= link_to bookmark, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" do %>
+                <i class="glyphicon glyphicon-remove"></i>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
