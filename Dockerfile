@@ -9,5 +9,5 @@ WORKDIR /backend_test
 ADD Gemfile /backend_test/Gemfile
 ADD Gemfile.lock /backend_test/Gemfile.lock
 RUN bundle install
-RUN yarn install
 ADD . /backend_test
+RUN yarn install
