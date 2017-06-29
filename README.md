@@ -19,12 +19,18 @@ On the root folder of the application run:
 docker-compose build
 ```
 
-This might take a while, as it will install all dependencies into the container, including Ruby, PostgreSQL, gems and front-end dependencies.
+This might take a while, as it will install all dependencies into the container, including Ruby, PostgreSQL, Rails and gems.
 
 After the container is built, you must generate the database:
 
 ```
 docker-compose run app rake db:setup
+```
+
+And install the front-end dependencies in your host file system:
+
+```
+docker-compose run app yarn install
 ```
 
 Now you are ready to run the application

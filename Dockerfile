@@ -10,4 +10,3 @@ ADD Gemfile /backend_test/Gemfile
 ADD Gemfile.lock /backend_test/Gemfile.lock
 RUN bundle install
 ADD . /backend_test
-RUN yarn install
